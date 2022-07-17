@@ -7,13 +7,19 @@ describe('UrlService', () => {
   let service: UrlService;
 
   const mockUrlRepository = {
-    create: jest.fn().mockImplementation((dto) => dto),
-    save: jest.fn().mockImplementation((url) =>
+    create: jest.fn((dto) => dto),
+    save: jest.fn((url) =>
       Promise.resolve({
         id: Math.random().toString(),
         ...url,
       }),
     ),
+    findOne: jest.fn((options) => ({
+      code: options.where.code,
+      longUrl: `https://${Math.random().toString()}`,
+      id: Math.random().toString(),
+      createdAt: new Date(),
+    })),
   };
 
   beforeEach(async () => {
@@ -43,6 +49,15 @@ describe('UrlService', () => {
     expect(await service.create(dto)).toEqual({
       id: expect.any(String),
       ...dto,
+    });
+  });
+
+  it('should get a url record by code', async () => {
+    expect(await service.get('test')).toEqual({
+      code: 'test',
+      longUrl: expect.any(String),
+      id: expect.any(String),
+      createdAt: expect.any(Date),
     });
   });
 });
