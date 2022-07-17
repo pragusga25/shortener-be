@@ -1,4 +1,4 @@
-name: Continues Integration
+name: ci
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.node-version }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
