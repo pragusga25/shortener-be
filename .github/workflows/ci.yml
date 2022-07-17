@@ -39,6 +39,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+      - uses: c-hive/gha-yarn-cache@v2
       - run: yarn
       - run: yarn test
