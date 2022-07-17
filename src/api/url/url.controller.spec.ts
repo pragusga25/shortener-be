@@ -36,7 +36,7 @@ describe('UrlController', () => {
   });
 
   it('should create a url', () => {
-    let dto = {
+    const dto = {
       longUrl: 'https://test.com',
       code: 'test',
     };
